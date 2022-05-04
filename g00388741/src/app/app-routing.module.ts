@@ -9,6 +9,14 @@ const routes: Routes = [
   {
     path: 'leaderboard',
     loadChildren: () => import('./leaderboard/leaderboard.module').then( m => m.LeaderboardPageModule)
+  },
+  {
+    path: 'fixtures',
+    loadChildren: () => import('./fixtures/fixtures.module').then( m => m.FixturesPageModule)
+  },
+  {
+    path: 'favourites',
+    loadChildren: () => import('./favourites-page/favourites-page.module').then( m => m.FavouritesPagePageModule)
   }
 ];
 @NgModule({

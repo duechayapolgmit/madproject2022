@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Leaderboard</ion-title>
+    <ion-title>Favourites</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +21,7 @@
       <ion-col>{{entry.fixtures.wins.total}}</ion-col>
       <ion-col>{{entry.fixtures.draws.total}}</ion-col>
       <ion-col>{{entry.fixtures.loses.total}}</ion-col>
-      <ion-col><ion-button (click)="favAdd(entry.team.id)">FAVOURITE</ion-button></ion-col>
+      <ion-col><ion-button (click)="removeItem(entry.team.id)">REMOVE</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

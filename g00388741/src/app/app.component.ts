@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FavouritesService } from './favourites.service';
+import { HttpData } from './http.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private dataGrab: HttpData, private storageFav: FavouritesService) {
+    this.dataGrab.initialise();
+    this.storageFav.loadItem();
+
+  }
 }

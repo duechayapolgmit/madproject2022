@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { initialize } from '@ionic/core';
+import { FavouritesService } from '../favourites.service';
 import { HttpData } from '../http.service';
 
 
@@ -9,37 +11,18 @@ import { HttpData } from '../http.service';
 })
 export class LeaderboardPage implements OnInit {
 
-  constructor(private dataGrab: HttpData) {
+  constructor(private dataGrab: HttpData, private storageFav: FavouritesService) {
     
   }
   
-  teams : Array<String>;
-  teamsStats: Array<String> = [];
-
-  iterator: number = 0;
+  teams : Array<any> = [];
 
   ngOnInit() {
-    this.dataGrab.GetTeams().subscribe( info => {
-      console.log(info);
-      for (this.iterator = 0;this.iterator < 1; this.iterator++) 
-      {
-        console.log('hey');
-        this.dataGrab.GetStandings(info.response[this.iterator].team.id).subscribe ( infoStats =>
-          {
-          this.teamsStats.push(infoStats);
-          })
-      }
-      console.log(this.teamsStats);
-      //this.teams = info.data[0].season_id
-     // this.initialiseComponent();
-    })
+    this.storageFav.loadItem();
+    this.teams = this.dataGrab.teams;
   }
- /* initialiseComponent(){
-    console.log(this.seasonID);
-    this.dataGrab.GetStandings(this.seasonID).subscribe( info => {
-      this.teams = info.data.standings;
-      console.log(this.teams); })
-    ;
-  }*/
 
+  favAdd(teamID: number){
+    this.storageFav.addItem(teamID);
+  }
 }

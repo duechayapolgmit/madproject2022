@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fixtures</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let fixture of fixtures">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="fixtures-text" size="4" style="text-align:right">
+          <img [src]="fixture.teams.home.logo" style="height:1.5em;"/> {{fixture.teams.home.name}}
+        </ion-col>
+        <ion-col size="4" style="text-align:center">
+          <h2>{{fixture.goals.home}}-{{fixture.goals.away}}</h2>
+        </ion-col>
+        <ion-col class="fixtures-text" size="4">
+         {{fixture.teams.away.name}} <img [src]="fixture.teams.away.logo" style="height:1.5em;"/>
+        </ion-col>
+      </ion-row>   
+    </ion-grid>
+  </ion-card>
+</ion-content>
