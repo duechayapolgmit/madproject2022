@@ -14,7 +14,6 @@ export class FixturesPage implements OnInit {
 
   ngOnInit() {
     this.fixtures = this.dataGrab.fixtures;
-    console.log(this.fixtures);
   }
 
 }

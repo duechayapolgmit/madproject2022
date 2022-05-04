@@ -8,10 +8,6 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
-      {
         path: 'leaderboard',
         loadChildren: () => import('../leaderboard/leaderboard.module').then(m => m.LeaderboardPageModule)
       },
@@ -24,15 +20,19 @@ const routes: Routes = [
         loadChildren: () => import('../favourites-page/favourites-page.module').then(m => m.FavouritesPagePageModule)
       },
       {
+        path: 'home',
+        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/tab3',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab3',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];

@@ -20,11 +20,18 @@ export class FavouritesPagePage implements OnInit {
   constructor(private dataGrab: HttpData, private storageFav: FavouritesService) { }
 
   ngOnInit() {
-    this.teamsIN = this.dataGrab.teams;
-    this.storageFav.loadItem();
-    this.favouriteTeams = this.storageFav.favouriteTeams;
+  }
 
-    this.putToList();
+  ionViewDidEnter(){
+    if (this.storageFav.change == 1){
+      this.teamsIN = this.dataGrab.teams;
+      this.storageFav.loadItem();
+      this.favouriteTeams = this.storageFav.favouriteTeams;
+
+      this.teams = [];
+      this.putToList();
+      this.storageFav.change = 0;
+    }
   }
 
   removeItem(teamID: number){
@@ -32,17 +39,15 @@ export class FavouritesPagePage implements OnInit {
     this.favouriteTeams = this.storageFav.favouriteTeams;
     this.teams = [];
 
+    this.storageFav.change = 1;
     this.putToList();
   }
 
   putToList(){ //get favourite teams -> put into the teams list
     for (this.iterator = 0; this.iterator < this.teamsIN.length; this.iterator++){ //loop through all the teams
-      console.log(this.favouriteTeams.length);
       for (this.iteratorJ = 0; this.iteratorJ < this.favouriteTeams.length; this.iteratorJ++){ //loop through each favourite team
-        console.log(this.favouriteTeams[this.iteratorJ]);
         if (this.teamsIN[this.iterator].team.id == this.favouriteTeams[this.iteratorJ]){
           this.teams.push(this.teamsIN[this.iterator]);
-          console.log(this.teams);
         }
       }
 

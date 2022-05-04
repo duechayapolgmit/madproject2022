@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'favourites',
     loadChildren: () => import('./favourites-page/favourites-page.module').then( m => m.FavouritesPagePageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   }
 ];
 @NgModule({

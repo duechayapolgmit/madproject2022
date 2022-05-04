@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivationStart, Router, RouterOutlet } from '@angular/router';
 import { initialize } from '@ionic/core';
 import { FavouritesService } from '../favourites.service';
 import { HttpData } from '../http.service';

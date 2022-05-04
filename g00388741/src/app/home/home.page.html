@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card style="padding-top:1em">
+    <ion-card-title>
+      <div style="text-align:center">LATEST MATCH</div>
+    </ion-card-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="fixtures-text" size="4" style="text-align:right">
+          <img [src]="fixture.teams.home.logo" style="height:1.5em;"/> {{fixture.teams.home.name}}
+        </ion-col>
+        <ion-col size="4" style="text-align:center">
+          <h2>{{fixture.goals.home}}-{{fixture.goals.away}}</h2>
+        </ion-col>
+        <ion-col class="fixtures-text" size="4">
+         {{fixture.teams.away.name}} <img [src]="fixture.teams.away.logo" style="height:1.5em;"/>
+        </ion-col>
+      </ion-row>   
+    </ion-grid>
+  </ion-card>
+  <ion-card style="padding-top:1em">
+    <ion-card-title>
+      <div style="text-align:center">TOP 5 TEAMS</div>
+    </ion-card-title>
+    <ion-grid>
+      <ion-row style="text-align:center;">
+        <ion-col><b>Country</b></ion-col>
+        <ion-col><b>Played</b></ion-col>
+        <ion-col><b>Won</b></ion-col>
+        <ion-col><b>Drawn</b></ion-col>
+        <ion-col><b>Lost</b></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let entry of teams" style="text-align:center;">
+        <ion-col>
+          <img [src]="entry.team.logo" style="width:1em"/> {{entry.team.name}}</ion-col>
+        <ion-col>{{entry.fixtures.played.total}}</ion-col>
+        <ion-col>{{entry.fixtures.wins.total}}</ion-col>
+        <ion-col>{{entry.fixtures.draws.total}}</ion-col>
+        <ion-col>{{entry.fixtures.loses.total}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card style="padding-top:1em">
+    <ion-card-title>
+      <div style="text-align:center">YOUR LOCAL TEAM</div>
+    </ion-card-title>
+    <ion-grid class="local-text" style="text-align:center;">
+      <ion-row>
+        <ion-col>
+          <img [src]="localTeam.team.logo" style="height:2em"/> {{localTeam.team.name}}</ion-col>
+      </ion-row>
+      <ion-row style="font-size:1em">
+          <ion-col><b>PLAYED</b></ion-col>
+          <ion-col><b>WON</b></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>{{localTeam.fixtures.played.total}}</ion-col>
+          <ion-col>{{localTeam.fixtures.wins.total}}</ion-col>
+      </ion-row>
+      <ion-row style="font-size:1em">
+        <ion-col><b>DRAWN</b></ion-col>
+        <ion-col><b>LOST</b></ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>{{localTeam.fixtures.draws.total}}</ion-col>
+        <ion-col>{{localTeam.fixtures.loses.total}}</ion-col>
+    </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

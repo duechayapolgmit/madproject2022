@@ -10,6 +10,8 @@ export class FavouritesService {
   favouriteTeams: number[] = [];
   iterator: number = 0;
 
+  change: number = 1;
+
   constructor(private storage: Storage, private alertController: AlertController) { 
     this.favouriteTeams = [];
 
@@ -60,6 +62,7 @@ export class FavouritesService {
     if (this.favouriteTeams == null) this.favouriteTeams = [teamID]; //if nothing in the array
     else this.favouriteTeams.push(teamID);
 
+    this.change = 1;
     this.presentAddSuccess();
     this.saveItem();
   }
@@ -74,6 +77,7 @@ export class FavouritesService {
       }
     }
 
+    this.change = 1;
     this.presentRemoveSuccess();
     this.saveItem();
   }
