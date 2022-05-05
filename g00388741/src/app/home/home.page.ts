@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
     }
   };
   teams : Array<any> = [];
+  teamsTemp: Array<any> = [];
   localTeam: any = {
     fixtures: {
       draws: {
@@ -55,6 +56,7 @@ export class HomePage implements OnInit {
   };
 
   iterator: number = 0;
+  iteratorJ: number = 0;
 
   //for geolocation
   latitude: any;
@@ -68,6 +70,7 @@ export class HomePage implements OnInit {
   async ngOnInit() {
     await this.presentLoading();
     this.getTopFive();
+    
 
     await this.GetLocalTeam();
   }
@@ -90,12 +93,37 @@ export class HomePage implements OnInit {
     console.log('Loading dismissed!');
   }
 
+  //get the top five teams from the leaderboard (by wins)
   getTopFive(){
+    this.teamsTemp = this.dataGrab.teams;
+    this.bubbleSort();
     for (this.iterator = 0; this.iterator < 5; this.iterator++){
-      this.teams[this.iterator] = this.dataGrab.teams[this.iterator];
+      this.teams[this.iterator] = this.teamsTemp[this.iterator];
     }
+    
   }
 
+  //sort by wins
+  temp: any;
+  bubbleSort(){
+    for (this.iterator = 0; this.iterator < this.teamsTemp.length - 1; this.iterator++){
+      for (this.iteratorJ = 0; this.iteratorJ < this.teamsTemp.length - this.iterator - 1; this.iteratorJ++){
+        if (this.teamsTemp[this.iteratorJ].fixtures.wins.total < this.teamsTemp[this.iteratorJ+1].fixtures.wins.total){
+          
+          this.temp = this.teamsTemp[this.iteratorJ];
+          this.teamsTemp[this.iteratorJ] = this.teamsTemp[this.iteratorJ+1];
+          this.teamsTemp[this.iteratorJ+1] = this.temp;
+          this.temp = null;
+
+        }
+
+      }
+
+    }
+    
+  }
+
+  //get location of the user
   async GetLocation(){
     this.geolocation.getCurrentPosition(this.success).then(
       (pos) => { 
@@ -103,7 +131,7 @@ export class HomePage implements OnInit {
         this.longitude = pos.coords.longitude;
     }
     ).then(
-      data => {
+      data => { //get location from latitude and longitude
         this.dataGrab.GetCountry(this.latitude, this.longitude).subscribe( info => {
           for (this.iterator = 0; this.iterator < info.results.length; this.iterator++){
             if (info.results[this.iterator].types[0] == 'country'){
@@ -117,7 +145,7 @@ export class HomePage implements OnInit {
     })
   }
 
-  async GetLocalTeam(){
+  async GetLocalTeam(){ //get the local team -- can cause errors due to the CORS policy
     for (this.iterator = 0; this.iterator < this.dataGrab.teams.length; this.iterator++){
       if (this.country == this.dataGrab.teams[this.iterator].team.name){
         this.localTeam = this.dataGrab.teams[this.iterator];

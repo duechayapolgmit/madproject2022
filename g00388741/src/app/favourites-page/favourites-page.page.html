@@ -16,7 +16,7 @@
     </ion-row>
     <ion-row *ngFor="let entry of teams" style="text-align:center;">
       <ion-col>
-        <img [src]="entry.team.logo" style="width:1em"/> {{entry.team.name}}</ion-col>
+        <img [src]="entry.team.logo" style="width:1em"/><br/>{{entry.team.name}}</ion-col>
       <ion-col>{{entry.fixtures.played.total}}</ion-col>
       <ion-col>{{entry.fixtures.wins.total}}</ion-col>
       <ion-col>{{entry.fixtures.draws.total}}</ion-col>

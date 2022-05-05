@@ -17,6 +17,7 @@ export class FavouritesService {
 
   }
 
+  /* ALERTS FOR ADDING/REMOVING FAVOURITES */
   async presentAlert(){
     const alert  = await this.alertController.create( {
       header: 'ERROR',
@@ -47,6 +48,7 @@ export class FavouritesService {
     await alert.present();
   }
 
+  //add team to the favourites list
   addItem(teamID: number){
     if (this.favouriteTeams == null) this.favouriteTeams = []; //for the for loop below
 
@@ -67,6 +69,7 @@ export class FavouritesService {
     this.saveItem();
   }
 
+  //remove team from the favourites list
   removeItem(teamID: number){
     if (this.favouriteTeams == null) this.favouriteTeams = []; //for the for loop below
 
@@ -82,11 +85,13 @@ export class FavouritesService {
     this.saveItem();
   }
 
+  //saves and creates storage for item saving
   saveItem(){
-    //creates storage for item saving
+    
     this.storage.create().then( () => {this.storage.set("favouriteTeams",this.favouriteTeams)});
   }
 
+  //load item from storage
   loadItem(){
     this.storage.create().then( () => {this.storage.get('favouriteTeams').then( data => {
       this.favouriteTeams = data 

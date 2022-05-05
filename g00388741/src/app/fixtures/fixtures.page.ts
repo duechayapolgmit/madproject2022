@@ -12,6 +12,7 @@ export class FixturesPage implements OnInit {
 
   fixtures: Array<any>;
 
+  //get the fixtures from the http service
   ngOnInit() {
     this.fixtures = this.dataGrab.fixtures;
   }

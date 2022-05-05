@@ -11,7 +11,7 @@ export class HttpData {
   constructor(private http:HttpClient) { }
 
   //headers and api keys for http
-  api_key: string = "66f80ac7fda4c2abf6d48436be4c70df";
+  api_key: string = "66f80ac7fda4c2abf6d48436be4c70df"; //api key for soccer/football related stuff
   headers = new HttpHeaders().set('x-apisports-key',this.api_key).set('x-rapidapi-host', 'v3.football.api-sports.io');
   leagueID: number = 4; //euro championship
   seasonID: number = 2020; //latest season = 2020
@@ -25,9 +25,10 @@ export class HttpData {
   iterator: number = 0;
   initialiseCheck: number = 0;
 
+  //initialise
   initialise() {
     if (this.initialiseCheck == 0){
-      this.GetTeams().subscribe( info => {
+      this.GetTeams().subscribe( info => { //get the teams
         
         for (this.iterator = 0;this.iterator < info.response.length; this.iterator++) 
         {
@@ -48,6 +49,7 @@ export class HttpData {
     }
   }
 
+  //get teams from league and season specified
   GetTeams():Observable<any>{
     return this.http.get("https://v3.football.api-sports.io/teams?league="+this.leagueID+"&season="+this.seasonID, {'headers':this.headers});
   }
@@ -57,10 +59,12 @@ export class HttpData {
     return this.http.get("https://v3.football.api-sports.io/teams/statistics?league="+this.leagueID+"&season="+this.seasonID+"&team="+teamID, {'headers':this.headers});
   }
 
+  //get fixtures from the league and season specified
   GetFixtures():Observable<any>{
     return this.http.get("https://v3.football.api-sports.io/fixtures?league="+this.leagueID+"&season="+this.seasonID+"&timezone=Europe/London", {'headers':this.headers});
   }
 
+  //get country based on latitude and longitude - UNSAFE as API key is exposed -- need to know how to prevent that
   GetCountry(lat:number, long:number):Observable<any>{
     return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&key=AIzaSyAzB8UeZVauyl697z1l9v9FJIO2ICNABuE")
   }

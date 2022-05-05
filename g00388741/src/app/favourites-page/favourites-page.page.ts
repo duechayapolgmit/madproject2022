@@ -22,6 +22,7 @@ export class FavouritesPagePage implements OnInit {
   ngOnInit() {
   }
 
+  //set up
   ionViewDidEnter(){
     if (this.storageFav.change == 1){
       this.teamsIN = this.dataGrab.teams;
@@ -34,6 +35,7 @@ export class FavouritesPagePage implements OnInit {
     }
   }
 
+  //remove a team from the favourites list
   removeItem(teamID: number){
     this.storageFav.removeItem(teamID);
     this.favouriteTeams = this.storageFav.favouriteTeams;
